@@ -1,0 +1,1291 @@
+unit main;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, ExtCtrls, TeeProcs, TeEngine, Chart, DbChart, DBXpress,
+  Provider, SqlExpr, StdCtrls, Buttons, Series, DB, DBClient, DBLocal,
+  DBLocalS, AdvProgressBar, Grids, DBGrids, FMTBcd, FileCtrl, FlCtrlEx,
+  AdvGlassButton, Menus, Shader, AdvPanel, ColListb, QuickRpt, QRCtrls;
+
+type
+  TFmain = class(TForm)
+    SQLConnection: TSQLConnection;
+    DSdati: TDataSource;
+    Tdati: TSQLClientDataSet;
+    Tdatiatt: TIntegerField;
+    Tdatimed: TIntegerField;
+    Tdatialfa1: TFloatField;
+    Tdatialfa2: TFloatField;
+    Tdatibeta1: TFloatField;
+    Tdatibeta2: TFloatField;
+    Tdatigamma1: TFloatField;
+    Tdatigamma2: TFloatField;
+    Tdatidelta: TFloatField;
+    Tdatitheta: TFloatField;
+    Tdatiraw: TIntegerField;
+    Tdatiora: TTimeField;
+    OpenDialog: TOpenDialog;
+    SQLQuery: TSQLQuery;
+    PopupMenu: TPopupMenu;
+    salvagrafico1: TMenuItem;
+    Shader1: TShader;
+    AdvPanel1: TAdvPanel;
+    pb: TAdvProgressBar;
+    Lreg: TLabel;
+    Llimite: TLabel;
+    Bload: TAdvGlassButton;
+    Blim: TAdvGlassButton;
+    BnoLim: TAdvGlassButton;
+    Elim: TEdit;
+    Ball: TAdvGlassButton;
+    Bclose: TAdvGlassButton;
+    RGdato: TRadioGroup;
+    AdvPanel2: TAdvPanel;
+    DBChartAll: TDBChart;
+    FastLineSeries1: TFastLineSeries;
+    FastLineSeries2: TFastLineSeries;
+    DBChart: TDBChart;
+    Series1: TFastLineSeries;
+    Series2: TFastLineSeries;
+    Series3: TFastLineSeries;
+    Series4: TFastLineSeries;
+    Series5: TFastLineSeries;
+    Series6: TFastLineSeries;
+    Series7: TFastLineSeries;
+    Series8: TFastLineSeries;
+    DBChartCfr: TDBChart;
+    FastLineSeries3: TFastLineSeries;
+    FastLineSeries4: TFastLineSeries;
+    FastLineSeries5: TFastLineSeries;
+    FastLineSeries6: TFastLineSeries;
+    FastLineSeries7: TFastLineSeries;
+    FastLineSeries8: TFastLineSeries;
+    FastLineSeries9: TFastLineSeries;
+    FastLineSeries10: TFastLineSeries;
+    Tdatictr: TIntegerField;
+    AdvPanel3: TAdvPanel;
+    RGcfr: TRadioGroup;
+    CBcfr: TCheckFileListBoxEx;
+    Bcfr: TAdvGlassButton;
+    LBtbls: TListBox;
+    Bsave: TAdvGlassButton;
+    Tdati2: TSQLClientDataSet;
+    DSdati2: TDataSource;
+    Tdati2att: TIntegerField;
+    Tdati2med: TIntegerField;
+    Tdati2alfa1: TFloatField;
+    Tdati2alfa2: TFloatField;
+    Tdati2beta1: TFloatField;
+    Tdati2beta2: TFloatField;
+    Tdati2gamma1: TFloatField;
+    Tdati2gamma2: TFloatField;
+    Tdati2delta: TFloatField;
+    Tdati2theta: TFloatField;
+    Tdati2raw: TIntegerField;
+    Tdati2ora: TTimeField;
+    Tdati2ctr: TIntegerField;
+    Lmin: TLabel;
+    Lmax: TLabel;
+    Lmed: TLabel;
+    Bstat: TAdvGlassButton;
+    Qrep: TQuickRep;
+    QRBand1: TQRBand;
+    Tdatides: TStringField;
+    QLtit: TQRLabel;
+    QRBand2: TQRBand;
+    QTdes: TQRDBText;
+    QTd1: TQRDBText;
+    QTd2: TQRDBText;
+    QTd3: TQRDBText;
+    QTd4: TQRDBText;
+    Tdati2des: TStringField;
+    QLperc1: TQRLabel;
+    QLperc2: TQRLabel;
+    QLperc3: TQRLabel;
+    QLperc4: TQRLabel;
+    Ltbl: TLabel;
+    Ltbl2: TLabel;
+    Bdati: TAdvGlassButton;
+    BselAll: TButton;
+    BdesAll: TButton;
+    QRall: TQuickRep;
+    QRBand3: TQRBand;
+    QRBand4: TQRBand;
+    QRLabel1: TQRLabel;
+    QLtitReg: TQRLabel;
+    QRLabel3: TQRLabel;
+    QRLabel4: TQRLabel;
+    QRLabel5: TQRLabel;
+    QRLabel6: TQRLabel;
+    QRLabel7: TQRLabel;
+    QRLabel8: TQRLabel;
+    QRLabel9: TQRLabel;
+    QRLabel10: TQRLabel;
+    QRLabel11: TQRLabel;
+    QRBand6: TQRBand;
+    QRDBText5: TQRDBText;
+    QRDBText6: TQRDBText;
+    QRDBText7: TQRDBText;
+    QRDBText8: TQRDBText;
+    QRDBText1: TQRDBText;
+    QRDBText2: TQRDBText;
+    QRDBText3: TQRDBText;
+    QRDBText4: TQRDBText;
+    QRDBText9: TQRDBText;
+    QRDBText10: TQRDBText;
+    GroupBox1: TGroupBox;
+    Bpaginaz: TAdvGlassButton;
+    Lpagine: TLabel;
+    Bsucc: TAdvGlassButton;
+    Bprec: TAdvGlassButton;
+    B2d3d: TAdvGlassButton;
+    procedure BitBtn1Click(Sender: TObject);
+    procedure TdatiAfterPost(DataSet: TDataSet);
+    procedure FormShow(Sender: TObject);
+    procedure RGdatoClick(Sender: TObject);
+    procedure salvagrafico1Click(Sender: TObject);
+    procedure BlimClick(Sender: TObject);
+    procedure BcloseClick(Sender: TObject);
+    procedure BnoLimClick(Sender: TObject);
+    procedure ElimKeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
+    procedure BallClick(Sender: TObject);
+    procedure BcfrClick(Sender: TObject);
+    procedure DlbChange(Sender: TObject);
+    procedure B2d3dClick(Sender: TObject);
+    procedure BsaveClick(Sender: TObject);
+    procedure LBtblsDblClick(Sender: TObject);
+    procedure Tdati2AfterPost(DataSet: TDataSet);
+    procedure BstatClick(Sender: TObject);
+    procedure QRBand2BeforePrint(Sender: TQRCustomBand;
+      var PrintBand: Boolean);
+    procedure BselAllClick(Sender: TObject);
+    procedure BdatiClick(Sender: TObject);
+    procedure BpaginazClick(Sender: TObject);
+    procedure BsuccClick(Sender: TObject);
+    procedure BprecClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Fmain: TFmain;
+
+implementation
+
+{$R *.dfm}
+
+var
+  pl,fn:string;
+  precCfr:byte;
+
+procedure Imposta(graf:TDBChart; yval0,tit0,yval1,tit1,tit,fn:string);
+begin
+  with Fmain do begin
+    graf.Series[0].YValues.ValueSource:=yval0;
+    graf.Series[0].Title:=tit0;
+    graf.Series[1].YValues.ValueSource:=yval1;
+    graf.Series[1].Title:=tit1;
+    graf.title.Text.Clear;
+    //graf.title.Text.Add(tit+' ('+extractFilename(fn)+')');
+    graf.title.Text.Add(tit+' ('+fn+')');
+  end;
+end;
+
+procedure QualeDato(graf:TDBChart; fn:string);
+begin
+  with Fmain do begin
+    Elim.Text:='';
+    case RGdato.ItemIndex of
+      0:Imposta(graf,'att','attenzione','med','meditazione','attenzione/meditazione',fn);
+      1:Imposta(graf,'alfa1','alfa 1','alfa2','alfa 2','alfa',fn);
+      2:Imposta(graf,'beta1','beta 1','beta2','beta 2','beta',fn);
+      3:Imposta(graf,'gamma1','gamma 1','','','gamma 1',fn);
+      4:Imposta(graf,'gamma2','gamma 2','','','gamma 2',fn);
+      5:Imposta(graf,'delta','delta','','','delta',fn);
+      6:Imposta(graf,'theta','theta','','','theta',fn);
+    end;
+    //DBChart.Align:=alClient;
+    DBChartAll.Hide;
+    DBChartCfr.Hide;
+    DBChart.Hide;
+    graf.align:=alCLient;
+    graf.Show;
+  end;
+end;
+
+procedure TFmain.BitBtn1Click(Sender: TObject);
+var
+  f:textFile;
+  r,oldH,rh:string;
+  h:TDateTime;
+  ctr:longint;
+  x:byte;
+
+  function Extr(v:string):string;
+  begin
+    result:=copy(v,4,255);
+  end;
+
+begin
+  openDialog.FileName:='*.cdat';
+  if not openDialog.Execute then
+    exit;
+  fn:=openDialog.FileName;
+  (*assignFile(f,pl+'\last.inf');
+  rewrite(f);
+  writeln(f,fn);
+  closeFile(f);*)
+
+  //med_:='1';
+  //if not inputQuery('informazione','media ogni x registrazioni',med_) then
+    //exit;
+  //val(med_,med,ctrl);
+  Tdati.Close;
+  SQLquery.close;
+  SQLquery.SQL.Clear;
+  SQLquery.SQL.Add('delete from dati');
+  SQLquery.ExecSQL(true);
+  Tdati.CommandText:='dati';
+  Tdati.Open; Tdati.DisableControls;
+
+  ctr:=0; pb.Show;
+  //assignFile(f,'bin\debug\arianna_poco_prima_di_sveglia.cdat');
+  assignFile(f,fn);
+  reset(f);
+  readln(f,r); //tit.
+  while not eof(f) do begin
+    readln(f,r); //ora
+    readln(f,r); //qualità segnale
+    if r<>'0' then begin
+      readln(f,r);
+      end
+    else
+      begin
+      inc(ctr);
+      readln(f,r);
+      readln(f,r);
+      readln(f,r);
+      readln(f,r);
+      readln(f,r);
+      readln(f,r);
+      readln(f,r);
+      readln(f,r);
+      readln(f,r);
+      readln(f,r);
+      readln(f,r);
+    end;
+  end; //while
+  closeFile(f);
+
+  Lreg.caption:=intToStr(ctr)+' registrazioni';
+  Fmain.repaint;
+  pb.Max:=ctr;
+  ctr:=0; oldH:='0';
+  //assignFile(f,'bin\debug\arianna_poco_prima_di_sveglia.cdat');
+  assignFile(f,fn);
+  reset(f);
+  readln(f,r); //tit.
+  while not eof(f) do begin
+    Tdati.insert;
+    readln(f,rh); //ora
+    h:=strToDateTime(rh);
+    TdatiOra.AsDateTime:=h;
+    readln(f,r); //qualità segnale
+    if r<>'0' then begin
+      readln(f,r);
+      Tdati.cancel;
+      end
+    else
+      begin
+      inc(ctr);
+      pb.Position:=ctr;
+      if oldH=rh then begin
+        Tdati.cancel;
+        for x:=1 to 11 do
+          readln(f,r);
+        end
+      else
+        begin
+        oldH:=rh;
+        readln(f,r);
+        TdatiAtt.Value:=strToInt(Extr(r));
+        readln(f,r);
+        TdatiMed.Value:=strToInt(Extr(r));
+        readln(f,r);
+        TdatiRaw.Value:=strToInt(Extr(r));
+        readln(f,r);
+        TdatiAlfa1.Value:=strToFloat(Extr(r));
+        readln(f,r);
+        TdatiAlfa2.Value:=strToFloat(Extr(r));
+        readln(f,r);
+        TdatiBeta1.Value:=strToFloat(Extr(r));
+        readln(f,r);
+        TdatiBeta2.Value:=strToFloat(Extr(r));
+        readln(f,r);
+        TdatiGamma1.Value:=strToFloat(Extr(r));
+        readln(f,r);
+        TdatiGamma2.Value:=strToFloat(Extr(r));
+        readln(f,r);
+        TdatiDelta.Value:=strToFloat(Extr(r));
+        readln(f,r);
+        TdatiTheta.Value:=strToFloat(Extr(r));
+        TdatiCtr.Value:=ctr;
+        Tdati.post;
+      end;
+    end;
+  end; //while
+  closeFile(f);
+  pb.Hide;
+  Tdati.EnableControls;
+  if RGdato.ItemIndex=-1 then begin
+    RGdato.ItemIndex:=0;
+    Imposta(DBChart,'att','attenzione','med','meditazione','attenzione/meditazione',fn);
+    end
+  else
+    QualeDato(DBChart,extractFilename(fn));
+  DBChart.Align:=alClient;
+  DBChartAll.hide;
+  DBChartCfr.hide;
+  DBChart.Show;
+end;
+
+procedure TFmain.TdatiAfterPost(DataSet: TDataSet);
+begin
+  if Tdati.ApplyUpdates(0)>0 then begin
+    showmessage('errore');
+    close;
+  end;
+end;
+
+procedure TFmain.FormShow(Sender: TObject);
+const
+  auth:array[0..15] of byte=(63, 104, 99, 95, 94, 93, 87, 98, 93, 12, 43, 90, 92, 69, 86, 73);
+var
+  f:textFile;
+  lst:TStrings;
+  x:word;
+  lbi:TlistBox;
+  autore:string;
+begin
+  Qrep.Height:=1; Qrep.Width:=1;
+  QRall.Height:=1; QRall.Width:=1;
+  DBChart.Hide;
+  DBChartCfr.Hide;
+  DBChartAll.Hide;
+
+  autore:='';
+  for x:=0 to length(auth) do
+    autore:=autore+chr(auth[x] + (x + 1) * 2);
+  Fmain.Caption:='Cerebrum - By '+autore;
+
+
+  //DBChart.Height:=Fmain.Height-Bload.Height*3;
+  DBChart.Align:=alTop;
+  precCfr:=0;
+  Lreg.caption:='';
+  Tdati.close;
+  fn:='';
+  RGdato.Top:=DBChart.Height+5;
+  GetDir(0,pl);
+  LBtbls.Clear;
+  SQLconnection.Open;
+  lst:=TStringList.Create;
+  SQLconnection.GetTableNames(lst,false);
+  if lst.Count>0 then begin
+    for x:=0 to lst.Count-1 do begin
+      fn:=lst[x];
+      fn:=copy(fn,8,255); //toglie "public."
+      if lowerCase(fn)<>'dati' then //di uso gen.
+        LBtbls.Items.Add(fn)
+    end;
+  end;
+
+  CBcfr.Clear;
+  if lst.Count>0 then begin
+    for x:=0 to lst.Count-1 do begin
+      fn:=lst[x];
+      fn:=copy(fn,8,255); //toglie "public."
+      if lowerCase(fn)<>'dati' then //di uso gen.
+        CBcfr.Items.Add(fn)
+    end;
+  end;
+  lst.Free;
+  CBcfr.Refresh; CBcfr.Repaint;
+
+end;
+
+procedure TFmain.RGdatoClick(Sender: TObject);
+begin
+  QualeDato(DBChart,extractFilename(fn));
+  (*case RGdato.ItemIndex of
+    0:Imposta('att','attenzione','med','meditazione','attenzione/meditazione');
+    1:Imposta('alfa1','alfa 1','alfa2','alfa 2','alfa');
+    2:Imposta('beta1','beta 1','beta2','beta 2','beta');
+    3:Imposta('gamma1','gamma 1','gamma2','gamma 2','gamma');
+    4:Imposta('delta','delta','theta','theta','delta e theta');
+  end;*)
+end;
+
+procedure TFmain.salvagrafico1Click(Sender: TObject);
+var
+  fnam:string;
+begin
+  fnam:=fn+'.bmp';
+  if inputQuery('informazione','nome file',fnam) then begin
+    DBChart.SaveToBitmapFile(fnam+'.bmp');
+    showmessage('salvato '+fnam+'.bmp');
+  end;
+end;
+
+procedure Limite;
+var
+  flt:string;
+begin
+  with Fmain do begin
+    if trim(Elim.Text)='' then begin
+      showMessage('indicare un limite!');
+      exit;
+    end;
+    if DBChartAll.Visible then begin
+      flt:='att<='+Elim.Text+' and med<='+Elim.Text;
+      flt:=flt+' and alfa1<='+Elim.Text+' and alfa2<='+Elim.Text;
+      flt:=flt+' and beta1<='+Elim.Text+' and beta2<='+Elim.Text;
+      flt:=flt+' and gamma1<='+Elim.Text;
+      flt:=flt+' and gamma2<='+Elim.Text;
+      flt:=flt+' and delta<='+Elim.Text;
+      flt:=flt+' and theta<='+Elim.Text;
+      end
+    else
+      case RGdato.ItemIndex of
+        0:flt:='att<='+Elim.Text+' and med<='+Elim.Text;
+        1:flt:='alfa1<='+Elim.Text+' and alfa2<='+Elim.Text;
+        2:flt:='beta1<='+Elim.Text+' and beta2<='+Elim.Text;
+        3:flt:='gamma1<='+Elim.Text;
+        4:flt:='gamma2<='+Elim.Text;
+        5:flt:='delta<='+Elim.Text;
+        6:flt:='theta<='+Elim.Text;
+      end;
+    Tdati.filter:=flt;
+    Tdati.Filtered:=true;
+    DBChart.RefreshData;
+    DBChartAll.RefreshData;
+  end;
+end;
+
+procedure TFmain.BlimClick(Sender: TObject);
+begin
+  Limite;
+end;
+
+procedure TFmain.BcloseClick(Sender: TObject);
+begin
+  close;
+end;
+
+procedure TFmain.BnoLimClick(Sender: TObject);
+begin
+  Tdati.Filtered:=false;
+  Elim.Text:='';
+  DBChart.RefreshData;
+  DBChartAll.RefreshData;
+end;
+
+procedure TFmain.ElimKeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+  case key of
+    VK_RETURN:Limite;
+  end;
+end;
+
+procedure TFmain.BallClick(Sender: TObject);
+var
+  tit:string;
+begin
+  DBChart.Visible:=false;
+  DBChartAll.Align:=alClient;
+  DBChartAll.Title.Text.Clear;
+  if LBtbls.ItemIndex=-1 then
+    tit:=fn
+  else
+    tit:=LBtbls.Items[LBtbls.ItemIndex];
+  DBChartAll.Title.Text.Add('alfa, beta, gamma, delta, theta ('+tit+')');
+  //att. e medit. escluse perché hanno valori troppo bassi rispetto agli altri e non si vedono
+  DBChartAll.Show;
+end;
+
+procedure TFmain.BcfrClick(Sender: TObject);
+var
+  x:word;
+  f:textFile;
+  r,oldH,rh:string;
+  h:TDateTime;
+  ctr,ctrGen,recn:longint;
+  q,fl,progr:byte;
+  ctrl:integer;
+  v,valMax:double;
+  lst:TStringList;
+  min,max,tot:double;
+
+  function Extr(v:string):string;
+  begin
+    result:=copy(v,4,255);
+  end;
+
+begin
+  if RGcfr.ItemIndex=-1 then begin
+    showMessage('selezionare il tipo di dato da confrontare');
+    exit;
+  end;
+  (*if Bcfr.BackColor=clAqua then begin
+    //CBcfr.Mask:=pl+'\*.cdat';
+    CBcfr.Refresh;
+    CBcfr.Show;
+    Bcfr.BackColor:=clRed;
+    end
+  else*)
+    begin
+    if precCfr>0 then
+      if CBcfr.SelCount<>precCfr then begin
+        showMessage('selezionare '+intToStr(precCfr)+' file o rilanciare il programma');
+        exit;
+      end;
+    if CBcfr.SelCount<2 then begin
+      showMessage('selezionare almeno 2 file');
+      exit;
+    end;
+    if CBcfr.SelCount>8 then begin
+      showMessage('selezionare al massimo 8 file');
+      exit;
+    end;
+    Lmin.Hide; Lmax.hide; Lmed.Hide;
+    precCfr:=CBcfr.SelCount;
+    Bcfr.BackColor:=clAqua;
+    //assignFile(f,pl+'\last.inf');
+    //rewrite(f);
+    //writeln(f,'');
+    //closeFile(f);
+    valMax:=1E+20;
+    if Elim.Text<>'' then
+      val(Elim.Text,valMax,ctrl);
+    progr:=0; min:=100E6; max:=-100E6; tot:=0; ctrGen:=0;
+    q:=RGcfr.itemIndex;
+
+    Tdati.Close;
+    SQLquery.close;            
+    SQLquery.SQL.Clear;
+    SQLquery.SQL.Add('delete from dati');
+    SQLquery.ExecSQL(true);
+    Tdati.Open; Tdati.DisableControls;
+    for fl:=0 to CBcfr.Count-1 do begin
+      if CBcfr.Selected[fl] then begin
+        Tdati2.Close;
+        Tdati2.CommandText:=CBcfr.Items[fl];
+        Tdati2.Open;
+        ctr:=0; pb.Max:=Tdati2.RecordCount; pb.Show;
+        Lreg.caption:=intToStr(pb.Max)+' registrazioni';
+        Fmain.repaint;
+        while not Tdati2.Eof do begin
+          inc(ctr); pb.Position:=ctr;
+
+          if Tdati.Locate('ctr',ctr,[]) then
+            Tdati.edit
+          else
+            Tdati.insert;
+          case q of
+            0:v:=Tdati2Alfa1.Value;
+            1:v:=Tdati2Alfa2.Value;
+            2:v:=Tdati2Beta1.Value;
+            3:v:=Tdati2Beta2.Value;
+            4:v:=Tdati2Gamma1.Value;
+            5:v:=Tdati2Gamma2.Value;
+            6:v:=Tdati2Delta.Value;
+            7:v:=Tdati2Theta.Value;
+            8:v:=Tdati2Att.Value;
+            9:v:=Tdati2Med.Value;
+          end;
+          if v<=valMax then begin
+            case progr of
+              0:TdatiAlfa1.Value:=v;
+              1:TdatiAlfa2.Value:=v;
+              2:TdatiBeta1.Value:=v;
+              3:TdatiBeta2.Value:=v;
+              4:TdatiGamma1.Value:=v;
+              5:TdatiGamma2.Value:=v;
+              6:TdatiDelta.Value:=v;
+              7:TdatiTheta.Value:=v;
+              8:TdatiAtt.Value:=trunc(v);
+              9:TdatiMed.Value:=trunc(v);
+            end;
+
+            inc(ctrGen);
+            if v<min then
+              min:=v;
+            if v>max then
+              max:=v;
+            tot:=tot+v;
+
+          end;
+          TdatiCtr.Value:=ctr;
+
+          Tdati.Post;
+          Tdati2.Next;
+        end;
+        Tdati2.Close;
+        pb.Hide;
+
+        (*assignFile(f,CBcfr.Items[fl]);
+        reset(f);
+        readln(f,r); //tit.
+        while not eof(f) do begin
+          readln(f,r); //ora
+          readln(f,r); //qualità segnale
+          if r<>'0' then begin
+            readln(f,r);
+            end
+          else
+            begin
+            inc(ctr);
+            readln(f,r);
+            readln(f,r);
+            readln(f,r);
+            readln(f,r);
+            readln(f,r);
+            readln(f,r);
+            readln(f,r);
+            readln(f,r);
+            readln(f,r);
+            readln(f,r);
+            readln(f,r);
+          end;
+        end; //while
+        closeFile(f);
+
+        q:=RGcfr.itemIndex;
+        Lreg.caption:=intToStr(ctr)+' registrazioni';
+        Fmain.repaint;
+        pb.Max:=ctr;
+        ctr:=0; recn:=0; oldH:='0';
+        assignFile(f,CBcfr.Items[fl]);
+        reset(f);
+        readln(f,r); //tit.
+        while not eof(f) do begin
+          inc(recn);
+          if Tdati.Locate('ctr',recn,[]) then
+            Tdati.edit
+          else
+            Tdati.insert;
+          readln(f,rh); //ora
+          //h:=strToDateTime(rh);
+          TdatiOra.AsDateTime:=0; //h
+          readln(f,r); //qualità segnale
+          if r<>'0' then begin
+            readln(f,r);
+            Tdati.cancel;
+            dec(recn);
+            end
+          else
+            begin
+            inc(ctr);
+            pb.Position:=ctr;
+            if oldH=rh then begin
+              Tdati.cancel;
+              for x:=1 to 11 do
+                readln(f,r);
+              Tdati.cancel;
+              dec(recn);
+              end
+            else
+              begin
+              oldH:=rh;
+              readln(f,r);
+              //if q=0 then v:=strToInt(Extr(r)); //att
+              readln(f,r);
+              //if q=1 then v:=strToInt(Extr(r)); //med
+              readln(f,r); //raw
+              readln(f,r);
+              if q=0 then v:=strToInt(Extr(r)); //a1
+              readln(f,r);
+              if q=1 then v:=strToFloat(Extr(r)); //a2
+              readln(f,r);
+              if q=2 then v:=strToFloat(Extr(r)); //b1
+              readln(f,r);
+              if q=3 then v:=strToFloat(Extr(r)); //b2
+              readln(f,r);
+              if q=4 then v:=strToFloat(Extr(r)); //g1
+              readln(f,r);
+              if q=5 then v:=strToFloat(Extr(r)); //g2
+              readln(f,r);
+              if q=6 then v:=strToFloat(Extr(r)); //delta
+              readln(f,r);
+              if q=7 then v:=strToFloat(Extr(r)); //th
+              if v<=valMax then
+                case progr of
+                  //1:TdatiAtt.Value:=trunc(v);
+                  //2:TdatiMed.Value:=trunc(v);
+                  1:TdatiAlfa1.Value:=v;
+                  2:TdatiAlfa2.Value:=v;
+                  3:TdatiBeta1.Value:=v;
+                  4:TdatiBeta2.Value:=v;
+                  5:TdatiGamma1.Value:=v;
+                  6:TdatiGamma2.Value:=v;
+                  7:TdatiDelta.Value:=v;
+                  8:TdatiTheta.Value:=v;
+                end;
+              TdatiCtr.Value:=recn;
+              Tdati.post;
+            end;
+          end;
+        end; //while
+        closeFile(f); *)
+
+        pb.Hide;
+        DBChartCfr.Series[progr].Title:=CBcfr.Items[fl];
+        inc(progr);
+      end; //if sel.
+    end; //for
+
+    if DBChartCfr.SeriesCount>progr then
+      for x:=progr+1 to 8 do //max 8  voci di grafico
+        DBChartCfr.Series[progr].Destroy; // Active:=false;
+
+    DBChartCfr.title.Text.Clear;
+    case RGcfr.ItemIndex of
+      0:DBChartCfr.title.Text.Add('confronti alfa 1');
+      1:DBChartCfr.title.Text.Add('confronti alfa 2');
+      2:DBChartCfr.title.Text.Add('confronti beta 1');
+      3:DBChartCfr.title.Text.Add('confronti beta 2');
+      4:DBChartCfr.title.Text.Add('confronti gamma 1');
+      5:DBChartCfr.title.Text.Add('confronti gamma 2');
+      6:DBChartCfr.title.Text.Add('confronti delta');
+      7:DBChartCfr.title.Text.Add('confronti theta');
+      8:DBChartCfr.title.Text.Add('confronti attenzione');
+      9:DBChartCfr.title.Text.Add('confronti meditazione');
+    end;
+
+    Tdati.EnableControls;
+    Lmin.Caption:='min.: '+format('%9.0n',[min]); Lmin.Show;
+    Lmax.Caption:='max : '+format('%9.0n',[max]); Lmax.Show;
+    Lmed.Caption:='med.: '+format('%9.0n',[tot/ctrGen]); Lmed.Show;
+
+    DBChartCfr.Align:=alClient;
+    DBChartCfr.RefreshData;
+    DBChartCfr.Refresh;
+    DBChartCfr.Show;
+    //CBcfr.Hide;
+  end; //else
+end;
+
+procedure TFmain.DlbChange(Sender: TObject);
+begin
+  (*CBcfr.Directory:=Dlb.Directory;
+  CBcfr.hide;
+  //CBcfr.ApplyFilePath(Dlb.Directory);
+  CBcfr.Refresh;
+  CBcfr.Repaint;
+  CBcfr.Show;*)
+end;
+
+procedure TFmain.B2d3dClick(Sender: TObject);
+begin
+  DBChartCfr.View3D:=not DBChartCfr.View3D;
+  DBChartAll.View3D:=not DBChartAll.View3D;
+  DBChart.View3D:=not DBChart.View3D;
+end;
+
+procedure TFmain.BsaveClick(Sender: TObject);
+var
+  sql:wideString;
+  x:byte;
+  fn:string;
+  ctr:longint;
+  lst:TStringList;
+begin
+  if not inputQuery('informazione','nome tabella',fn) then
+    exit;
+  fn:=lowerCase(fn); //else pgs dà err perché lo crea sempre lowercase
+  SQlquery.close;
+  SQlquery.SQL.Clear;
+  sql:='CREATE TABLE '+fn+' ( ';
+  sql:=sql+'att integer, med integer, alfa1 double precision, ';
+  sql:=sql+'alfa2 double precision, beta1 double precision, beta2 double precision, ';
+  sql:=sql+'gamma1 double precision, gamma2 double precision, delta double precision, ';
+  sql:=sql+'theta double precision, raw integer, ora time without time zone, ';
+  sql:=sql+'ctr integer NOT NULL, des character varying(255), CONSTRAINT kp_'+fn+' PRIMARY KEY (ctr) )';
+  SQlquery.SQL.Add(sql);
+  SQlquery.ExecSQL(true);
+  SQlquery.SQL.Clear;
+  sql:='ALTER TABLE '+fn+' OWNER TO postgres ';
+  SQlquery.SQL.Add(sql);
+  SQlquery.ExecSQL(true);
+  Tdati2.close;
+  Tdati2.CommandText:=fn;
+  Tdati2.Open;
+  Tdati.First; pb.Position:=0; pb.Max:=Tdati.RecordCount; pb.Show; ctr:=0;
+  while not Tdati.eof do begin
+    Tdati2.insert;
+    inc(ctr); pb.Position:=ctr;
+    for x:=0 to Tdati.FieldCount-1 do
+      Tdati2.FieldByName(Tdati.Fields[x].FieldName).Value:=Tdati.Fields[x].Value;
+    Tdati2.Post;
+    Tdati.Next;
+  end;
+  Tdati2.Close;
+  pb.hide;
+
+  LBtbls.Clear;
+  lst:=TStringList.Create;
+  SQLconnection.GetTableNames(lst,false);
+  if lst.Count>0 then begin
+    for x:=0 to lst.Count-1 do begin
+      fn:=lst[x];
+      fn:=copy(fn,8,255); //toglie "public."
+      if lowerCase(fn)<>'dati' then //di uso gen.
+        LBtbls.Items.Add(fn)
+    end;
+  end;
+  LBtbls.Refresh; LBtbls.Repaint;
+
+  CBcfr.Clear;
+  if lst.Count>0 then begin
+    for x:=0 to lst.Count-1 do begin
+      fn:=lst[x];
+      fn:=copy(fn,8,255); //toglie "public."
+      if lowerCase(fn)<>'dati' then //di uso gen.
+        CBcfr.Items.Add(fn)
+    end;
+  end;
+  lst.Free;
+  CBcfr.Refresh; CBcfr.Repaint;
+
+end;
+
+procedure TFmain.LBtblsDblClick(Sender: TObject);
+var
+  x,ctr,corr,v:longint;
+  valMax:double;
+  med_,s:string;
+  med,ctrl:integer;
+begin
+  med_:='1';
+  if not inputQuery('informazione','media ogni x registrazioni',med_) then
+    exit;
+  val(med_,med,ctrl);
+  valMax:=0;
+  if Elim.Text<>'' then
+    val(Elim.Text,valMax,ctrl);
+  fn:=trim(LBtbls.Items[lbtbls.ItemIndex]);
+  if med>1 then begin
+    val(med_,med,ctrl);
+    Tdati.close;
+    SQLquery.close;
+    SQLquery.SQL.Clear;
+    SQLquery.SQL.Add('delete from dati');
+    SQLquery.ExecSQL(true);
+    Tdati.CommandText:='dati'; Tdati.open; Tdati.DisableControls;
+    pb.Max:=Tdati.RecordCount; pb.Position:=0; pb.Show; ctr:=0; corr:=0;
+    Tdati2.close;
+    Tdati2.CommandText:=LBtbls.Items[LBtbls.ItemIndex];
+    Tdati2.Open;
+    Tdati2.First; pb.Position:=0; pb.Max:=Tdati2.RecordCount; ctr:=0;
+    while not Tdati2.eof do begin
+
+      inc(ctr); pb.Position:=ctr;
+      //if (valMax>0) and (v<=valmax) ...
+      if (corr=0) or (ctr mod med = 0) then begin
+        Tdati.insert;
+        for x:=0 to Tdati.FieldCount-1 do begin
+          s:=Tdati2.Fields[x].Text;
+          if s='' then
+            v:=0
+          else
+            v:=Tdati2.Fields[x].Value;
+          Tdati.FieldByName(Tdati.Fields[x].FieldName).Value:=v;
+        end;
+        inc(corr);
+        TdatiCtr.Value:=corr;
+        Tdati.Post;
+        end
+      else
+        begin
+        if Tdati.findKey([corr]) then begin
+          Tdati.edit;
+          for x:=0 to Tdati.FieldCount-1 do
+            if (Tdati.Fields[x].FieldName<>'des') and (Tdati.Fields[x].FieldName<>'ctr') then begin
+              s:=Tdati2.Fields[x].Text;
+              if s='' then
+                v:=0
+              else
+                v:=Tdati2.Fields[x].Value;
+              Tdati.FieldByName(Tdati.Fields[x].FieldName).Value:=(Tdati.FieldByName(Tdati.Fields[x].FieldName).Value+v)/2;
+            end;
+          Tdati.Post;
+          end
+        else
+          showmessage('errore');
+      end;
+
+      Tdati2.Next;
+    end;
+    Tdati2.Close;
+    pb.Hide;
+    Tdati.EnableControls;
+    end
+  else
+    begin
+    Lreg.Caption:='';
+    DBChartcfr.Hide;
+    DBChartAll.Hide;
+    Tdati.Close;
+    Tdati.CommandText:=trim(LBtbls.Items[lbtbls.ItemIndex]);
+    Tdati.Open;
+  end;
+  Tdati.First;
+  if RGdato.ItemIndex=-1 then begin
+    RGdato.ItemIndex:=0;
+    Imposta(DBChart,'att','attenzione','med','meditazione','attenzione/meditazione',LBtbls.Items[LBtbls.ItemIndex]);
+    end
+  else
+    QualeDato(DBChart,LBtbls.Items[LBtbls.ItemIndex]);
+  DBChart.Align:=alClient;
+  DBChart.Show;
+end;
+
+procedure TFmain.Tdati2AfterPost(DataSet: TDataSet);
+begin
+  if Tdati2.ApplyUpdates(0)>0 then begin
+    showmessage('errore');
+  end;
+end;
+
+procedure TFmain.BstatClick(Sender: TObject);
+var
+  x:word;
+  f:textFile;
+  r,fls:widestring;
+  h:TDateTime;
+  ctr,ctrGen,recn:longint;
+  q,sv,fl,progr:byte;
+  ctrl:integer;
+  v,valMax:double;
+  lst:TStringList;
+  tot:double;
+  ok:boolean;
+  min,max,vals:array[0..9] of double;
+  stat:array[0..9] of array[1..10] of longint;
+begin
+  Lmin.Hide; Lmax.hide; Lmed.Hide;
+  precCfr:=CBcfr.SelCount;
+  Bcfr.BackColor:=clAqua;
+  for q:=0 to 9 do
+    min[q]:=1E9;
+  for q:=0 to 9 do
+    max[q]:=-1E9;
+  if Elim.Text<>'' then
+    val(Elim.Text,valMax,ctrl);
+  progr:=1; tot:=0; ctrGen:=0; fls:='';
+  for fl:=0 to CBcfr.Count-1 do begin
+    if CBcfr.Selected[fl] then begin
+      fls:=fls+' '+CBcfr.Items[fl];
+      Tdati2.Close;
+      Tdati2.CommandText:=CBcfr.Items[fl];
+      Tdati2.Open;
+      ctr:=0; pb.Max:=Tdati2.RecordCount; pb.Show;
+      Lreg.caption:=intToStr(pb.Max)+' registrazioni';
+      Fmain.repaint;
+      while not Tdati2.Eof do begin
+        inc(ctr); pb.Position:=ctr;
+        for q:=0 to 9 do begin
+          case q of
+            0:v:=Tdati2Alfa1.Value;
+            1:v:=Tdati2Alfa2.Value;
+            2:v:=Tdati2Beta1.Value;
+            3:v:=Tdati2Beta2.Value;
+            4:v:=Tdati2Gamma1.Value;
+            5:v:=Tdati2Gamma2.Value;
+            6:v:=Tdati2Delta.Value;
+            7:v:=Tdati2Theta.Value;
+            8:v:=Tdati2Att.Value;
+            9:v:=Tdati2Med.Value;
+          end;
+          if v<min[q] then
+            min[q]:=v;
+          if v>max[q] then
+            max[q]:=v;
+        end; //for
+        inc(ctrGen);
+        Tdati2.Next;
+      end;
+      pb.Hide;
+      inc(progr);
+      Tdati2.close;
+    end; //if sel.
+  end; //for
+
+  //for q:=0 to 9 do
+    //vals[q]:=max[q]-min[q];
+  v:=max[q]/4;
+  (*vals[1]:=v;
+  vals[2]:=v*2;
+  vals[3]:=v*3;
+  vals[4]:=max[q];*)
+  for q:=0 to 9 do
+    for sv:=1 to 4 do
+    stat[q][sv]:=0;
+
+  for fl:=0 to CBcfr.Count-1 do begin
+    if CBcfr.Selected[fl] then begin
+      Tdati2.Close;
+      Tdati2.CommandText:=CBcfr.Items[fl];
+      Tdati2.Open;
+      ctr:=0; pb.Max:=Tdati2.RecordCount; pb.Show;
+      Lreg.caption:=intToStr(pb.Max)+' registrazioni';
+      Fmain.repaint;
+      while not Tdati2.Eof do begin
+        inc(ctr); pb.Position:=ctr;
+        for q:=0 to 9 do begin
+          case q of
+            0:v:=Tdati2Alfa1.Value;
+            1:v:=Tdati2Alfa2.Value;
+            2:v:=Tdati2Beta1.Value;
+            3:v:=Tdati2Beta2.Value;
+            4:v:=Tdati2Gamma1.Value;
+            5:v:=Tdati2Gamma2.Value;
+            6:v:=Tdati2Delta.Value;
+            7:v:=Tdati2Theta.Value;
+            8:v:=Tdati2Att.Value;
+            9:v:=Tdati2Med.Value;
+          end;
+          if (v<max[q]/4) then
+            inc(stat[q][1])
+          else
+            if (v>=max[q]/4) and (v<max[q]/4*2) then
+              inc(stat[q][2])
+            else
+              if (v>=max[q]/4*2) and (v<max[q]/4*3) then
+                inc(stat[q][3])
+              else
+                if (v>=max[q]/4*3) then
+                  inc(stat[q][4])
+                else
+                  showmessage('errore: valore non previsto');
+          (*for sv:=1 to 4 do
+            if v<=vals[sv] then
+              inc(stat[q][sv]);*)
+        end; //for
+        inc(ctrGen);
+        Tdati2.Next;
+      end;
+      pb.Hide;
+      inc(progr);
+      Tdati2.close;
+    end; //if sel.
+  end; //for
+
+  //calcola perc.:
+  ctr:=0;
+  for sv:=1 to 4 do
+    ctr:=ctr+stat[1][sv]; //calc. tot. reg., sono = per gni riga di stat
+  if ctr=0 then begin
+    showmessage('0 registrazioni');
+    exit;
+  end;
+  for q:=0 to 9 do
+    for sv:=1 to 4 do begin
+      v:=stat[q][sv]*100/ctr;
+      stat[q][sv]:=trunc(v);
+    end;
+
+  Tdati.open;
+  Tdati.EmptyDataSet;
+  Tdati.Close;
+  SQLquery.close;
+  SQLquery.SQL.Clear;
+  SQLquery.SQL.Add('delete from dati');
+  SQLquery.ExecSQL(true);
+  Tdati.Open; Tdati.DisableControls;
+  for q:=0 to 9 do begin
+    Tdati.insert;
+    TdatiDes.value:='';
+    TdatiCtr.value:=q*10;
+    TdatiAlfa1.value:=max[q]/4;
+    TdatiAlfa2.value:=max[q]/4*2;
+    TdatiBeta1.value:=max[q]/4*3;
+    TdatiBeta2.value:=max[q];
+    Tdati.post;
+    Tdati.insert;
+    case q of
+      0:r:='alfa 1      ';
+      1:r:='alfa 2      ';
+      2:r:='beta 1      ';
+      3:r:='beta 2      ';
+      4:r:='gamma 1     ';
+      5:r:='gamma 2     ';
+      6:r:='delta       ';
+      7:r:='theta       ';
+      8:r:='attenzione  ';
+      9:r:='meditazione ';
+    end;
+    TdatiCtr.value:=q*10+1;
+    TdatiDes.value:=r;
+    TdatiAlfa1.value:=stat[q][1];
+    TdatiAlfa2.value:=stat[q][2];
+    TdatiBeta1.value:=stat[q][3];
+    TdatiBeta2.value:=stat[q][4];
+    Tdati.post;
+    Tdati.insert;
+    TdatiDes.Value:='.';
+    TdatiCtr.value:=q*10+2;
+    Tdati.post;
+  end; //for q
+
+  //se selezionati tutti, scrive limiti massimi su file quando > 95%:
+  if CBcfr.SelCount=CBcfr.Items.Count then begin
+    assignFile(f,pl+'\maxs.inf'); rewrite(f);
+    for q:=0 to 9 do begin
+      v:=0; ok:=true;
+      for fl:=1 to 4 do
+        if ok then begin
+          v:=v+stat[q][fl];
+          if v>95 then begin
+            ok:=false;
+            writeln(f,trunc((max[q]/4)*fl));
+          end;
+        end;
+    end; //for q
+    closeFile(f);
+  end;
+
+  DBChartCfr.hide;
+  DBChart.hide;
+  DBChartAll.hide;
+  QLtit.Caption:='statistiche da file '+fls;
+  QRep.Preview;
+end;
+
+procedure TFmain.QRBand2BeforePrint(Sender: TQRCustomBand;
+  var PrintBand: Boolean);
+begin
+  QLperc1.Enabled:=(TdatiDes.Text<>'') and (TdatiDes.Text<>'.');
+  QLperc2.Enabled:=(TdatiDes.Text<>'') and (TdatiDes.Text<>'.');
+  QLperc3.Enabled:=(TdatiDes.Text<>'') and (TdatiDes.Text<>'.');
+  QLperc4.Enabled:=(TdatiDes.Text<>'') and (TdatiDes.Text<>'.');
+  if TdatiDes.Text='' then begin
+    QTd1.Font.Color:=clBlue;
+    QTd2.Font.Color:=clBlue;
+    QTd3.Font.Color:=clBlue;
+    QTd4.Font.Color:=clBlue;
+    end
+  else
+    if TdatiDes.Text='.' then begin
+      QTd1.Font.Color:=clWhite;
+      QTd2.Font.Color:=clWhite;
+      QTd3.Font.Color:=clWhite;
+      QTd4.Font.Color:=clWhite;
+      end
+    else
+      begin
+      QTd1.Font.Color:=clBlack;
+      QTd2.Font.Color:=clBlack;
+      QTd3.Font.Color:=clBlack;
+      QTd4.Font.Color:=clBlack;
+    end;
+end;
+
+procedure TFmain.BselAllClick(Sender: TObject);
+var
+  x:word;
+begin
+  for x:=0 to CBcfr.Items.Count-1 do
+    CBcfr.Selected[x]:=sender=BselAll;
+end;
+
+procedure TFmain.BdatiClick(Sender: TObject);
+begin
+  DBChartCfr.hide;
+  DBChart.hide;
+  DBChartAll.hide;
+  QLtitReg.Caption:='registrazioni'; // da file '+fn;
+  QRall.Preview;
+end;
+
+procedure TFmain.BpaginazClick(Sender: TObject);
+begin
+  if DBChart.MaxPointsPerPage=0 then begin
+    DBChart.MaxPointsPerPage:=100;
+    Lpagine.Show;
+    Lpagine.caption:='pagina '+intToStr(DBChart.Page)+' di '+intToStr(DBChart.NumPages);
+    Bsucc.Show; Bprec.Show;
+    end
+  else
+    begin
+    DBChart.MaxPointsPerPage:=0;
+    Lpagine.Hide;
+    Bsucc.Hide; Bprec.Hide;
+  end;
+
+  if DBChartCfr.MaxPointsPerPage=0 then begin
+    DBChartCfr.MaxPointsPerPage:=100;
+    Lpagine.Show;
+    Lpagine.caption:='pagina '+intToStr(DBChartCfr.Page)+' di '+intToStr(DBChartCfr.NumPages);
+    Bsucc.Show; Bprec.Show;
+    end
+  else
+    begin
+    DBChartCfr.MaxPointsPerPage:=0;
+    Lpagine.Hide;
+    Bsucc.Hide; Bprec.Hide;
+  end;
+
+  if DBChartAll.MaxPointsPerPage=0 then begin
+    DBChartAll.MaxPointsPerPage:=100;
+    Lpagine.Show;
+    Lpagine.caption:='pagina '+intToStr(DBChartAll.Page)+' di '+intToStr(DBChartAll.NumPages);
+    Bsucc.Show; Bprec.Show;
+    end
+  else
+    begin
+    DBChartAll.MaxPointsPerPage:=0;
+    Lpagine.Hide;
+    Bsucc.Hide; Bprec.Hide;
+  end;
+end;
+
+procedure TFmain.BsuccClick(Sender: TObject);
+
+  procedure Quale(gr:TDBChart);
+  begin
+    if gr.Visible then begin
+      gr.NextPage;
+      Lpagine.caption:='pagina '+intToStr(gr.Page)+' di '+intToStr(gr.NumPages);
+    end;
+  end;
+
+begin
+  Quale(DBChart);
+  Quale(DBChartCfr);
+  Quale(DBChartAll);
+end;
+
+procedure TFmain.BprecClick(Sender: TObject);
+
+  procedure Quale(gr:TDBChart);
+  begin
+    if gr.Visible then begin
+      gr.PreviousPage;
+      Lpagine.caption:='pagina '+intToStr(gr.Page)+' di '+intToStr(gr.NumPages);
+    end;
+  end;
+
+begin
+  Quale(DBChart);
+  Quale(DBChartCfr);
+  Quale(DBChartAll);
+end;
+
+end.

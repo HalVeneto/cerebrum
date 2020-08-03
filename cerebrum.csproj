@@ -1,0 +1,235 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.50727</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{1F7DEAD5-DC13-47B0-B13B-AD271D642221}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>cerebrum</RootNamespace>
+    <AssemblyName>cerebrum</AssemblyName>
+    <ApplicationIcon>NaturalMotion - endorphin 2 [Blue Button].ico</ApplicationIcon>
+    <ManifestCertificateThumbprint>91372C9275EF8511CE5A07CD46FF2614C06F86A3</ManifestCertificateThumbprint>
+    <ManifestKeyFile>cerebrum_TemporaryKey.pfx</ManifestKeyFile>
+    <GenerateManifests>true</GenerateManifests>
+    <SignManifests>true</SignManifests>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <StartupObject>
+    </StartupObject>
+    <TargetZone>LocalIntranet</TargetZone>
+    <PublishUrl>D:\c\prove\cerebrum\cerebrum\install\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <AutorunEnabled>true</AutorunEnabled>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="ThinkGearNET, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\ThinkGearNET_1.1_src\ThinkGearNET_1.1_src\ThinkGearNETTest\bin\x86\Debug\ThinkGearNET.dll</HintPath>
+    </Reference>
+    <Reference Include="WebChart, Version=1.1.1.4, Culture=neutral" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Fcsv.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Fcsv.Designer.cs">
+      <DependentUpon>Fcsv.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Fdatireg.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Fdatireg.Designer.cs">
+      <DependentUpon>Fdatireg.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Fgamma.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Fgamma.Designer.cs">
+      <DependentUpon>Fgamma.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Fgraph.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Fgraph.Designer.cs">
+      <DependentUpon>Fgraph.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Finfo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Finfo.Designer.cs">
+      <DependentUpon>Finfo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Flive.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Flive.Designer.cs">
+      <DependentUpon>Flive.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Fmain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Fmain.Designer.cs">
+      <DependentUpon>Fmain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Fscritt.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Fscritt.Designer.cs">
+      <DependentUpon>Fscritt.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Fsegnali.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Fsegnali.Designer.cs">
+      <DependentUpon>Fsegnali.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Fsinglew.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Fsinglew.Designer.cs">
+      <DependentUpon>Fsinglew.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Fstat.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Fstat.Designer.cs">
+      <DependentUpon>Fstat.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Fcsv.resx">
+      <DependentUpon>Fcsv.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Fdatireg.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>Fdatireg.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Fgamma.resx">
+      <DependentUpon>Fgamma.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Fgraph.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>Fgraph.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Finfo.resx">
+      <DependentUpon>Finfo.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Flive.resx">
+      <DependentUpon>Flive.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Fmain.resx">
+      <DependentUpon>Fmain.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Fscritt.resx">
+      <DependentUpon>Fscritt.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Fsegnali.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>Fsegnali.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Fsinglew.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>Fsinglew.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Fstat.resx">
+      <DependentUpon>Fstat.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <None Include="cerebrum_TemporaryKey.pfx" />
+    <None Include="ClassDiagram1.cd" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="stats.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="NaturalMotion - endorphin 2 [Blue Button].ico" />
+    <None Include="app.config" />
+    <BaseApplicationManifest Include="Properties\app.manifest" />
+    <None Include="Resources\csr_bp_breach2.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.2.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 2.0</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <PublishFile Include="WebChart">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Exclude</PublishState>
+      <FileType>Assembly</FileType>
+    </PublishFile>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
